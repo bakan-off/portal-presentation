@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Цифровая экосистема МУК «Кондинская МЦБС» — Интерактивные схемы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(20, 27, 45, 0.85);
+      --border: rgba(56, 189, 248, 0.2);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.35);
+      --emerald: #10b981;
+      --purple: #a855f7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+    }
+    .header {
+      text-align: center;
+      max-width: 900px;
+      margin-bottom: 48px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 40%, #93c5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 48px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 18px 40px var(--accent-glow);
+    }
+    .card-preview {
+      width: 100%;
+      height: 210px;
+      background-size: cover;
+      background-position: top center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .card-preview::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(20, 27, 45, 0.95));
+    }
+    .card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .card-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .tag-blue { color: #38bdf8; }
+    .tag-emerald { color: #34d399; }
+    .tag-purple { color: #c084fc; }
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    .card-features {
+      list-style: none;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+    .card-features li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-features li::before {
+      content: '✓';
+      color: var(--emerald);
+      font-weight: 800;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 13px 20px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+      width: 100%;
+      max-width: 1200px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="badge">МУК «Кондинская МЦБС» • Интерактивная архитектура</div>
+    <h1>Цифровая экосистема библиотечной системы</h1>
+    <p class="subtitle">
+      Интерактивный комплекс схем архитектуры и ключевых регламентов работы для демонстрации руководству, кураторам и IT-специалистам.
+    </p>
+  </div>
+
+  <div class="grid">
+
+    <!-- Card 1 -->
+    <div class="card">
+      <div class="card-preview" style="background-image: url('role_all_1920.png');"></div>
+      <div class="card-body">
+        <span class="card-tag tag-blue">Архитектура &amp; Роли</span>
+        <h2 class="card-title">Панорама экосистемы</h2>
+        <p class="card-desc">
+          Сводная карта взаимодействия 20+ сельских библиотек, внутренних контуров безопасности, базы SQLite, WebDAV-хранилища и внешних каналов вещания.
+        </p>
+        <ul class="card-features">
+          <li>Интерактивный выбор ролей с фильтрацией</li>
+          <li>5 готовых сюжетных сценариев обзора</li>
+          <li>Переключатель светлой и тёмной тем</li>
+        </ul>
+        <a href="portal_ecosystem.html" class="btn">
+          🚀 Открыть живую схему
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <div class="card-preview" style="background-image: url('news_workflow.visual-check.2048x1320.dark.png');"></div>
+      <div class="card-body">
+        <span class="card-tag tag-emerald">Workflow &amp; SMM</span>
+        <h2 class="card-title">Конвейер публикации новости</h2>
+        <p class="card-desc">
+          Сквозной процесс: от заполнения формы и сжатия снимков в сельском филиале до модерации, автоповорота EXIF и кросспостинга во ВКонтакте и MAX.
+        </p>
+        <ul class="card-features">
+          <li>Canvas-сжатие 25 МБ снимков в браузере</li>
+          <li>Zero-Disk WebDAV выгрузка в Облако Mail.ru</li>
+          <li>Модерация и прямой экспорт через VK / MAX API</li>
+        </ul>
+        <a href="news_workflow.html" class="btn">
+          🚀 Открыть живую схему
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <div class="card-preview" style="background-image: url('servicedesk_workflow.visual-check.2048x1320.dark.png');"></div>
+      <div class="card-body">
+        <span class="card-tag tag-purple">Service Desk &amp; IT</span>
+        <h2 class="card-title">Удаленная помощь ПК (RustDesk)</h2>
+        <p class="card-desc">
+          Регламент оперативной помощи сельским библиотекарям: portable-клиент, анимированный колокольчик и прямое подключение к ПК инженером.
+        </p>
+        <ul class="card-features">
+          <li>Portable RustDesk без прав администратора</li>
+          <li>Подключение в 1 клик по ссылке rustdesk://</li>
+          <li>Многоцветный колокольчик и фоновый Heartbeat</li>
+        </ul>
+        <a href="servicedesk_workflow.html" class="btn">
+          🚀 Открыть живую схему
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Муниципальное учреждение культуры «Кондинская межпоселенческая централизованная библиотечная система» &copy; 2026. Разработано с использованием стандарта Archify.
+  </div>
+
+</body>
+</html>
